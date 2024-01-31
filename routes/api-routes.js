@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const util = require('../db/util');
+const utils = require('../db/utils');
 
 // GET "/api/notes" gets all notes
 router.get('/notes', (req, res) => {
-  util
+  utils
     .getNotes()
     .then((notes) => {
       return res.json(notes);
@@ -12,7 +12,7 @@ router.get('/notes', (req, res) => {
 });
 
 router.post('/notes', (req, res) => {
-  util
+  utils
     .addNote(req.body)
     .then((note) => res.json(note))
     .catch((err) => res.status(500).json(err));
@@ -20,7 +20,7 @@ router.post('/notes', (req, res) => {
 
 // DELETE "/api/notes" delete note with ID
 router.delete('/notes/:id', (req, res) => {
-  util
+  utils
     .removeNote(req.params.id)
     .then(() => res.json({ ok: true }))
     .catch((err) => res.status(500).json(err));
